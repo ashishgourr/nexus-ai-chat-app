@@ -16,12 +16,21 @@ class AIDatasource {
     required List<Content> history,
   }) async* {
     try {
-      yield* _gemini.generateStreamedResponse(
+      await for (final chunk in _gemini.generateStreamedResponse(
         message: message,
         conversationHistory: history,
-      );
+      )) {
+        yield chunk;
+      }
     } catch (_) {
       yield* _mock.generateResponse(message: message, history: history);
     }
+  }
+
+  Stream<String> streamResponseMockOnly({
+    required String message,
+    required List<Content> history,
+  }) {
+    return _mock.generateResponse(message: message, history: history);
   }
 }

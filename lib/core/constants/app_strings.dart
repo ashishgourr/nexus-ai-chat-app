@@ -71,6 +71,8 @@ class AppStrings {
 
   // ─── Chat detail ────────────────────────────────────────────────────────
   static const String responseFailed = 'Response failed';
+  static const String apiQuotaExceeded =
+      "AI quota reached. Try again in a few minutes, or check your API plan.";
   static const String rateLimitMessage =
       'Please wait a moment before sending again.';
   static const String savedForWhenBackOnline =

@@ -185,19 +185,33 @@ class ChatRepositoryImpl implements ChatRepository {
         yield (failure: null, data: chunk);
       }
     } on AppException catch (e) {
-      yield (
-        failure: _isLikelyOffline(e)
-            ? const NetworkFailure(_offlineMessage)
-            : ServerFailure(e.message),
-        data: null,
-      );
+      if (_isLikelyOffline(e)) {
+        yield (
+          failure: const NetworkFailure(_offlineMessage),
+          data: null,
+        );
+        return;
+      }
+      await for (final chunk in _ai.streamResponseMockOnly(
+        message: message,
+        history: contentHistory,
+      )) {
+        yield (failure: null, data: chunk);
+      }
     } catch (e) {
-      yield (
-        failure: _isLikelyOffline(e)
-            ? const NetworkFailure(_offlineMessage)
-            : ServerFailure(e.toString()),
-        data: null,
-      );
+      if (_isLikelyOffline(e)) {
+        yield (
+          failure: const NetworkFailure(_offlineMessage),
+          data: null,
+        );
+        return;
+      }
+      await for (final chunk in _ai.streamResponseMockOnly(
+        message: message,
+        history: contentHistory,
+      )) {
+        yield (failure: null, data: chunk);
+      }
     }
   }
 
