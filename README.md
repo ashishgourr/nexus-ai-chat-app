@@ -4,6 +4,12 @@ Flutter AI chat app (Android & iOS) with anonymous/Google/Apple sign-in, streami
 
 ---
 
+# Demo Video 
+
+https://github.com/user-attachments/assets/7192733d-70c3-4172-be4c-142df31ed391
+
+
+
 ## Submission
 
 - **Repository:** [https://github.com/ashishgourr/nexus-ai-chat-app](https://github.com/ashishgourr/nexus-ai-chat-app)
